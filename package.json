@@ -5,8 +5,7 @@
   "repository": "https://github.com/Manusiabodoh4/monggo.git",
   "license": "MIT",
   "scripts": {
-    "start": "parcel babel-node index.js",
-    "build": "parcel build babel-node index.js"
+    "start": "parcel index.js"
   },
   "dependencies": {
     "mongodb": "^3.6.4"
@@ -15,7 +14,6 @@
     "@babel/cli": "^7.13.0",
     "@babel/core": "^7.13.8",
     "@babel/node": "^7.13.0",
-    "@babel/preset-env": "^7.13.9",
-    "parcel-bundler": "^1.12.4"
+    "@babel/preset-env": "^7.13.9"
   }
 }
