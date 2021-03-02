@@ -1,7 +1,10 @@
-const add = (a,b) => {
-  return a + b;
+import MongoBuilder from './src/connBuilder'
+
+const main = async () => {
+  const obj = (new MongoBuilder()).setDatabase('kotakjualan').setCollection('user').build();
+  const con = (await obj.createConnection()).createConnectionDatabase().createConnectionCollection().getConnectionCollection();
+  console.log(await con.findOne());
 }
 
-let hasil = add(10,10);
+main();
 
-console.log(hasil);
