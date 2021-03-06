@@ -1,7 +1,8 @@
-const MongoOperation = require('./src/mongodb/MongoOperation');
+const MongoBuilder = require('./src/mongodb/MongoBuilder');
 
 async function main(){
-  return 0;
+  const user = await (new MongoBuilder()).setDatabase("kotakjualan").setCollection("user").build();
+  console.log(await user.findAll());
 }
 
 main();

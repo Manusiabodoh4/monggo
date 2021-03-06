@@ -1,5 +1,5 @@
-const {MongoConnection} = require('./MongoConnection');
-const FindOption = require('./MongoFind');
+const MongoConnection = require('./MongoConnection');
+const FindOption = require('./MongoFindOption');
 
 class MongoOperation extends MongoConnection{  
   constructor(){super();}    
