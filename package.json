@@ -5,15 +5,10 @@
   "repository": "https://github.com/Manusiabodoh4/monggo.git",
   "license": "MIT",
   "scripts": {
-    "start": "babel-node index.js"
+    "start": "node index.js"
   },
   "dependencies": {
     "mongodb": "^3.6.4"
   },
-  "devDependencies": {
-    "@babel/cli": "^7.13.0",
-    "@babel/core": "^7.13.8",
-    "@babel/node": "^7.13.0",
-    "@babel/preset-env": "^7.13.9"
-  }
+  "devDependencies": {}
 }
