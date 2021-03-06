@@ -4,7 +4,7 @@ class FindOption{
     this.projection = {};
     this.sort = {};
     this.skip = 0;
-    this.limit = 100;
+    this.limit = 100;    
   }  
   getFilter(){
     return this.filter;
