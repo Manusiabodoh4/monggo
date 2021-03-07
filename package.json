@@ -5,7 +5,7 @@
   "repository": "https://github.com/Manusiabodoh4/monggo.git",
   "license": "MIT",
   "scripts": {
-    "start": "node index.js"
+    "start": "node usage.js"
   },
   "dependencies": {
     "mongodb": "^3.6.4"

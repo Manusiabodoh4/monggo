@@ -1,5 +1,5 @@
 const MongoConnection = require('./MongoConnection');
-const DeleteOption = require('./MongoDceleteOption');
+const DeleteOption = require('./MongoDeleteOption');
 const UpdateOption = require('./MongoUpdateOption');
 const FindOption = require('./MongoFindOption');
 const SaveOption = require('./MongoSaveOption');
@@ -176,5 +176,4 @@ class MongoOperation extends MongoConnection{
     return true;
   }
 }
-
 module.exports = MongoOperation;
