@@ -1,4 +1,5 @@
 const MongoConnection = require('./MongoConnection');
+const DeleteOption = require('./MongoDceleteOption');
 const UpdateOption = require('./MongoUpdateOption');
 const FindOption = require('./MongoFindOption');
 const SaveOption = require('./MongoSaveOption');
@@ -108,7 +109,7 @@ class MongoOperation extends MongoConnection{
   }
   async #handleSaveManySecure(x){
     if(!Array.isArray(x)) return false;
-    const findOption = new FindOption().setFilter(x[0]).setProjection({_id:1});
+    const findOption = (new FindOption()).setFilter(x[0]).setProjection({_id:1});
     try {
       if(await this.findOne(findOption) != null){
         return false;
@@ -150,8 +151,29 @@ class MongoOperation extends MongoConnection{
     }
     return true;
   }
-  async deleteOne(){
-
+  async deleteOne(param = new DeleteOption()){
+    if(!param.isWorthObject())return false;
+    try {
+      const findOption = (new FindOption()).setFilter(param.getFitler()).setProjection({_id:1});
+      if(await this.findOne(findOption) == null) return false;
+      await this.getCollection().deleteOne(param.getFitler());
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+    return true;
+  }
+  async deleteMany(param = new DeleteOption()){
+    if(!param.isWorthObject())return false;
+    try {
+      const findOption = (new FindOption()).setFilter(param.getFitler()).setProjection({_id:1});
+      if(await this.findOne(findOption) == null) return false;
+      await this.getCollection().deleteMany(param.getFitler());
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+    return true;
   }
 }
 

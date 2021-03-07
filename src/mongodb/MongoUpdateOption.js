@@ -3,7 +3,7 @@ class MongoUpdateOption{
   #newData;
   constructor(){
     this.#filter = {};
-    this.#set = {};
+    this.#newData = {};
   }
   getFitler(){
     return this.#filter;
