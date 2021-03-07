@@ -2,14 +2,14 @@ class MongoSaveOption{
   #data;
   #secure;  
   constructor(){
-    this.#data = null;
+    this.#data = {};
     this.#secure = true;    
   }
   getData(){
     return this.#data;
   }
   setData(x){
-    x = (x||null);
+    x = (x||{});
     this.#data = x;
     return this;
   }
@@ -22,7 +22,7 @@ class MongoSaveOption{
     return this;
   }  
   isWorthObject(){  
-    if(typeof this.#data != 'object' || this.#data == null) return false;
+    if(typeof this.#data != 'object') return false;
     
     let lengthKeysObject = 0;
     if(Array.isArray(this.#data)) lengthKeysObject = Object.keys(this.#data[0]).length;     

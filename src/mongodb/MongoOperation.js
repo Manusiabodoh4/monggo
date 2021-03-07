@@ -1,4 +1,5 @@
 const MongoConnection = require('./MongoConnection');
+const UpdateOption = require('./MongoUpdateOption');
 const FindOption = require('./MongoFindOption');
 const SaveOption = require('./MongoSaveOption');
 
@@ -128,6 +129,29 @@ class MongoOperation extends MongoConnection{
     else{
       return await this.#handleSaveManyNoSecure(param.getData());
     }
+  }
+  async updateOne(param = new UpdateOption()){    
+    if(!param.isWorthObject())return false;
+    try {
+      await this.getCollection().updateOne(param.getFitler(), {$set:param.getNewData()});
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+    return true;
+  }
+  async updateMany(param = new UpdateOption()){    
+    if(!param.isWorthObject())return false;
+    try {
+      await this.getCollection().updatemany(param.getFitler(), {$set:param.getNewData()});
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+    return true;
+  }
+  async deleteOne(){
+
   }
 }
 
