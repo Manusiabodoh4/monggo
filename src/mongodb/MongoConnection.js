@@ -1,7 +1,7 @@
 const MongoDB = require('mongodb');
 const ConnectionOption = require('./MongoConnectionOption');
 
-class MongoConnection{
+class MongoConnection{  
   constructor(){
     this._connection = null;
     this._database   = null;

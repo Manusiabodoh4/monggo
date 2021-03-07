@@ -1,5 +1,6 @@
 const MongoConnection = require('./MongoConnection');
 const FindOption = require('./MongoFindOption');
+const SaveOption = require('./MongoSaveOption');
 
 class MongoOperation extends MongoConnection{  
   constructor(){super();}    
@@ -60,6 +61,72 @@ class MongoOperation extends MongoConnection{
     } catch (error) {
       console.error(error);
       return;  
+    }
+  }
+  async #handleSaveOneNoSecure(x){
+    if(Array.isArray(x)) return false;
+    try {await this.getCollection().insertOne(x);} 
+    catch (error) {
+      console.error(error)
+      return false;
+    }
+    return true;
+  }
+  async #handleSaveOneSecure(x){
+    if(Array.isArray(x)) return false;
+    const findOption = new FindOption().setFilter(x).setProjection({_id:1});
+    try {
+      if(await this.findOne(findOption) != null){
+        return false;
+      }
+      await this.getCollection().insertOne(x);
+    } 
+    catch (error) {
+      console.error(error)
+      return false;
+    }
+    return true;
+  }
+  async saveOne(param = new SaveOption()){        
+    if(!param.isWorthObject()) return false;
+    if(param.getSecure()){
+      return await this.#handleSaveOneSecure(param.getData());
+    }
+    else{
+      return await this.#handleSaveOneNoSecure(param.getData());
+    }
+  }
+  async #handleSaveManyNoSecure(x){
+    if(!Array.isArray(x)) return false;
+    try {await this.getCollection().insertMany(x);} 
+    catch (error) {
+      console.error(error)
+      return false;
+    }
+    return true;
+  }
+  async #handleSaveManySecure(x){
+    if(!Array.isArray(x)) return false;
+    const findOption = new FindOption().setFilter(x[0]).setProjection({_id:1});
+    try {
+      if(await this.findOne(findOption) != null){
+        return false;
+      }
+      await this.getCollection().insertMany(x);
+    } 
+    catch (error) {
+      console.error(error)
+      return false;
+    }
+    return true;
+  }
+  async saveMany(param = new SaveOption()){        
+    if(!param.isWorthObject()) return false;
+    if(param.getSecure()){
+      return await this.#handleSaveManySecure(param.getData());
+    }
+    else{
+      return await this.#handleSaveManyNoSecure(param.getData());
     }
   }
 }

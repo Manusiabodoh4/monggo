@@ -1,31 +1,34 @@
 class ConnectionOption{
+  #uri;
+  #databaseName;
+  #collectionName;
   constructor(){
-    this.uri = 'mongodb://127.0.0.1:27017'
-    this.databaseName = "";
-    this.collectionName = "";
+    this.#uri = 'mongodb://127.0.0.1:27017'
+    this.#databaseName = "";
+    this.#collectionName = "";
   }
   getUri(){
-    return this.uri;
+    return this.#uri;
   }
   setUri(x){
     x = (x||"mongodb://127.0.0.1:27017")
-    this.uri = x;
+    this.#uri = x;
     return this;
   }
   getDatabaseName(){
-    return this.databaseName;
+    return this.#databaseName;
   }
   setDatabaseName(x){
     x = (x||"");
-    this.databaseName = x;
+    this.#databaseName = x;
     return this;
   }
   getCollectionName(){
-    return this.collectionName;
+    return this.#collectionName;
   }
   setCollectionName(x){
     x = (x||"");
-    this.collectionName = x;
+    this.#collectionName = x;
     return this;
   }
 }
